@@ -1,0 +1,99 @@
+.events {
+  width: 100%;
+  height: 100%;
+
+  h2 {
+    margin: 1rem;
+  }
+
+  &--tags {
+    width: 100%;
+    margin: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &--listing {
+    width: 98%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  &--card {
+    width: 12rem;
+
+    border-radius: 0.2rem;
+    box-shadow: $shadow-medium;
+    background-color: white;
+
+    div {
+      height: fit-content;
+      width: 98%;
+
+      h5 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    a {
+      margin-left: 0.5rem;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-decoration: none;
+    }
+
+    div:first-child {
+      height: 3rem;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      img {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        margin: 0.5rem;
+      }
+    }
+
+    img {
+      height: 12rem;
+      object-fit: cover;
+    }
+
+    p {
+      margin-left: 0.5rem;
+      display: block;
+      font-size: 0.5rem;
+    }
+
+    div:last-child {
+      display: flex;
+      justify-content: end;
+
+      button {
+        all: unset;
+        cursor: pointer;
+        margin: 0.5rem;
+      }
+    }
+  }
+  &--stickyDate {
+    width: 100%;
+    height: 4rem;
+    position: fixed;
+    top: 2.3rem;
+    left: 0;
+    z-index: 99;
+
+    background: linear-gradient(to bottom, pink 20%, rgba(255, 192, 203, 0));
+    display: flex;
+    justify-content: center;
+  }
+}

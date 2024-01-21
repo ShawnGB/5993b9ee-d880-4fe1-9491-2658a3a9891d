@@ -1,0 +1,24 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: fit-content;
+
+  background-color: $primary;
+  box-shadow: $shadow-medium;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  div {
+    margin: 0.5rem 1rem;
+  }
+
+  &--left {
+    display: flex;
+    gap: 1rem;
+  }
+}
