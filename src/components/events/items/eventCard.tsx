@@ -19,7 +19,7 @@ export const EventCard = ({
   const { addItem } = useContext(EventsContext);
 
   return (
-    <div className="events--card">
+    <div className="events--card" data-card={JSON.stringify({ date })}>
       <div>
         <Image
           src={flyerFront}

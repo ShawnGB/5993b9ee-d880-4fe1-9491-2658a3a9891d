@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useRef } from "react";
+import { useContext, useEffect, useState } from "react";
 import { EventCard } from "./eventCard";
 import { EventsContext } from "../../../context/EventsContext";
 import { Empty } from "antd";
@@ -6,37 +6,39 @@ import moment from "moment";
 
 export const EventsListing = () => {
   const { events } = useContext(EventsContext);
-  const previousDateRef = useRef(null);
+  const [stickyDate, setStickyDate] = useState(moment().format("DD.MM.YYYY"));
 
   useEffect(() => {
-    // Update the previous date when the events change
-    if (events && events.length > 0) {
-      previousDateRef.current = events[0].date;
-    }
+    const targetElements = document.querySelectorAll("div.events--card");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Get the data of the intersecting card
+          const cardData = JSON.parse(entry.target.getAttribute("data-card"));
+          setStickyDate(moment(cardData.date).format("DD.MM.YYYY"));
+        }
+      });
+    });
+
+    targetElements.forEach((card) => {
+      observer.observe(card);
+    });
+
+    // Cleanup observer when component unmounts
+    return () => observer.disconnect();
   }, [events]);
 
   return (
     <div className="events--listing">
       {events ? (
-        events.map((event, index) => {
-          const formattedDate = moment(event.date).format("DD.MM.YYYY");
-
-          // Update previousDateRef if the comparison fails
-          if (event.date !== previousDateRef.current) {
-            previousDateRef.current = event.date;
-          }
-
-          return (
-            <React.Fragment key={index}>
-              {event.date !== previousDateRef.current && (
-                <div className="events--stickyDate">
-                  <div>{formattedDate}</div>
-                </div>
-              )}
-              <EventCard {...event} />
-            </React.Fragment>
-          );
-        })
+        <>
+          <div className="events--stickyDate">
+            <div>{stickyDate}</div>
+          </div>
+          {events.map((event, index) => (
+            <EventCard key={index} {...event} />
+          ))}
+        </>
       ) : (
         <Empty
           image={Empty.PRESENTED_IMAGE_SIMPLE}
