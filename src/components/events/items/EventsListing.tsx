@@ -14,7 +14,9 @@ export const EventsListing = () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           // Get the data of the intersecting card
-          const cardData = JSON.parse(entry.target.getAttribute("data-card"));
+          const cardData = JSON.parse(
+            entry.target.getAttribute("data-card") as string,
+          );
           setStickyDate(moment(cardData.date).format("DD.MM.YYYY"));
         }
       });
