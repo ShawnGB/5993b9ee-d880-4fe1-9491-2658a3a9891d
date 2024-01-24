@@ -1,4 +1,4 @@
-````markdown
+
 # Events App
 
 This repository contains the code for the "Events App" developed as part of the recruiting task for Teclead Ventures. The application is built using React, Vite, and Ant Design.
@@ -80,4 +80,3 @@ The design of the application should roughly follow the provided example. Howeve
 - The repository name is generated using [UUID Generator](https://www.uuidgenerator.net/version4) for privacy reasons.
 - The application was developed using React, Vite, and Ant Design.
 - The transition from VSCode to Neovim might have influenced the development duration.
-````
