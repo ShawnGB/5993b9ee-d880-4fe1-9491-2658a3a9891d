@@ -80,8 +80,4 @@ The design of the application should roughly follow the provided example. Howeve
 - The repository name is generated using [UUID Generator](https://www.uuidgenerator.net/version4) for privacy reasons.
 - The application was developed using React, Vite, and Ant Design.
 - The transition from VSCode to Neovim might have influenced the development duration.
-
-```
-
-```
 ````
