@@ -25,7 +25,7 @@ export const ShoppingCart = () => {
       </Tooltip>
 
       <Drawer title="My Events" open={showDrawer} onClose={triggerDrawer}>
-        {shoppingCartItems ? (
+        {shoppingCartItems.length > 0 ? (
           shoppingCartItems.map((item, index) => (
             <ShoppingCartItem key={index} {...item} />
           ))

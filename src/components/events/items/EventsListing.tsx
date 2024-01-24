@@ -13,7 +13,6 @@ export const EventsListing = () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Get the data of the intersecting card
           const cardData = JSON.parse(
             entry.target.getAttribute("data-card") as string,
           );
@@ -26,13 +25,12 @@ export const EventsListing = () => {
       observer.observe(card);
     });
 
-    // Cleanup observer when component unmounts
     return () => observer.disconnect();
   }, [events]);
 
   return (
     <div className="events--listing">
-      {events ? (
+      {events.length > 0 ? (
         <>
           <div className="events--stickyDate">
             <div>{stickyDate}</div>
