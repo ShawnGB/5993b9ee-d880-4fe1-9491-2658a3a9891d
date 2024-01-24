@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, ReactNode } from "react";
 import axios from "axios";
 import { message } from "antd";
+import moment from "moment";
 
 type EventsContextValues = {
   events: EventType[];
@@ -34,7 +35,13 @@ const EventsContextProvider = ({ children }: { children: ReactNode }) => {
   const getEvents = async () => {
     try {
       const { data } = await axios.get(API_URL);
-      setEvents(data);
+
+      const sortedEvents = data.sort(
+        (a: EventType, b: EventType) =>
+          moment(a.date).valueOf() - moment(b.date).valueOf(),
+      );
+
+      setEvents(sortedEvents);
     } catch (error) {
       console.error("Error fetching events:", error);
     }
