@@ -86,14 +86,18 @@
   }
   &--stickyDate {
     width: 100%;
-    height: 4rem;
+    height: 6rem;
     position: fixed;
     top: 2.3rem;
     left: 0;
     z-index: 99;
 
-    background: linear-gradient(to bottom, pink 20%, rgba(255, 192, 203, 0));
+    background: linear-gradient(to bottom, white 20%, rgba(255, 192, 203, 0));
     display: flex;
     justify-content: center;
+
+    div {
+      margin: 1rem;
+    }
   }
 }

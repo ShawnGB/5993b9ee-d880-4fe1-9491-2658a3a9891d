@@ -7,6 +7,7 @@ import moment from "moment";
 export const EventsListing = () => {
   const { events } = useContext(EventsContext);
   const [stickyDate, setStickyDate] = useState(moment().format("DD.MM.YYYY"));
+  const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
     const targetElements = document.querySelectorAll("div.events--card");
@@ -17,6 +18,7 @@ export const EventsListing = () => {
             entry.target.getAttribute("data-card") as string,
           );
           setStickyDate(moment(cardData.date).format("DD.MM.YYYY"));
+          setIsScrolling(true);
         }
       });
     });
@@ -28,13 +30,31 @@ export const EventsListing = () => {
     return () => observer.disconnect();
   }, [events]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolling(true);
+      } else {
+        setIsScrolling(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div className="events--listing">
       {events.length > 0 ? (
         <>
-          <div className="events--stickyDate">
-            <div>{stickyDate}</div>
-          </div>
+          {isScrolling && (
+            <div className="events--stickyDate">
+              <div>{stickyDate}</div>
+            </div>
+          )}
           {events.map((event, index) => (
             <EventCard key={index} {...event} />
           ))}
