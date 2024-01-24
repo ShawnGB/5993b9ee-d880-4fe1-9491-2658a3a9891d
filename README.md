@@ -1,5 +1,3 @@
-Certainly! Here's the complete text for your README.md that you can copy and paste into your repository:
-
 ````markdown
 # Events App
 
@@ -14,7 +12,6 @@ Follow these steps to run the application locally:
 ```bash
 git clone https://github.com/ShawnGB/5993b9ee-d880-4fe1-9491-2658a3a9891d
 ```
-````
 
 2. Navigate to the project folder:
 
@@ -87,3 +84,4 @@ The design of the application should roughly follow the provided example. Howeve
 ```
 
 ```
+````
