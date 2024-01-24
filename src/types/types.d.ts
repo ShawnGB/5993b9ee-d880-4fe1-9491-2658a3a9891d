@@ -37,3 +37,8 @@ type CartItem = {
   flyerFront?: string;
   date: string;
 };
+
+type CityType = {
+  city: string;
+  country: string;
+};

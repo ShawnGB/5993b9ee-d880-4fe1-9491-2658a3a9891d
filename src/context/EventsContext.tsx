@@ -9,6 +9,8 @@ type EventsContextValues = {
   addItem: (item: CartItem) => void;
   removeItem: (_id: string, title: string) => void;
   setSearchQuery: (query: string) => void;
+  cities: CityType[];
+  dateSpan: string;
 };
 
 // Should be in .env
@@ -20,6 +22,8 @@ const defaultValues: EventsContextValues = {
   addItem: () => {},
   removeItem: () => {},
   setSearchQuery: () => {},
+  cities: [],
+  dateSpan: "",
 };
 
 const EventsContext = createContext(defaultValues);
@@ -98,6 +102,44 @@ const EventsContextProvider = ({ children }: { children: ReactNode }) => {
     filterByTitle(searchQuery);
   }, [searchQuery]);
 
+  // extract further variables from data that might be useful for future filtres
+  const [cities, setCities] = useState<CityType>([]);
+
+  useEffect(() => {
+    const uniqueCombinations = new Set<string>();
+
+    const uniqueCitiesArray = Array.from(
+      new Set(
+        events
+          .map((event) => {
+            const combinationKey = `${event.city}-${event.country}`;
+
+            if (!uniqueCombinations.has(combinationKey)) {
+              uniqueCombinations.add(combinationKey);
+              return { city: event.city, country: event.country };
+            }
+
+            return null;
+          })
+          .filter(Boolean),
+      ),
+    );
+
+    setCities(uniqueCitiesArray);
+  }, [events]);
+
+  const [dateSpan, setDateSpan] = useState<string>("");
+
+  useEffect(() => {
+    if (events.length > 0) {
+      const startDate = moment(events[0].date).format("DD.MM.YYYY");
+      const endDate = moment(events[events.length - 1].date).format(
+        "DD.MM.YYYY",
+      );
+      setDateSpan(`${startDate} - ${endDate}`);
+    }
+  }, [events]);
+
   return (
     <>
       {contextHolder}
@@ -108,6 +150,8 @@ const EventsContextProvider = ({ children }: { children: ReactNode }) => {
           addItem,
           removeItem,
           setSearchQuery,
+          cities,
+          dateSpan,
         }}
       >
         {children}
